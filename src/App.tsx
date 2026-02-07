@@ -106,7 +106,8 @@ export default function App() {
     return {
       lines: lines.length,
       chars: text.length,
-      nonEmptyLines: nonEmptyLines.length
+      nonEmptyLines: nonEmptyLines.length,
+      emptyLines: lines.length - nonEmptyLines.length
     };
   }, [text]);
 
@@ -141,6 +142,8 @@ export default function App() {
       if (typeof content === 'string') {
         setText(content);
         setExecutionTime(0);
+        // Immediate save to localStorage
+        localStorage.setItem('text-tool-content', content);
       }
     };
     reader.readAsText(file);
@@ -291,6 +294,9 @@ export default function App() {
             <span className="flex items-center gap-2">
               <Hash size={14} />
               <span>Lines: <span className="text-slate-200 font-mono">{stats.lines}</span></span>
+            </span>
+            <span className="flex items-center gap-2">
+              <span>Empty: <span className="text-slate-200 font-mono">{stats.emptyLines}</span></span>
             </span>
             <span className="flex items-center gap-2">
               <Type size={14} />

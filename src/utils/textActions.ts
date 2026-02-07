@@ -16,7 +16,7 @@ export const textActions = {
       .split('\n')
       .map((line) => (line.trim() ? `+${line}` : line))
       .join('\n'),
-  removePlus: (text: string) => text.replace(/^\+/gm, ''),
+  removePlus: (text: string) => text.replace(/(^|\s)\+(?=\w)/g, '$1'),
   
   addQuotes: (text: string) =>
     text
